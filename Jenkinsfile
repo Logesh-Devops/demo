@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = credentials('docker-hub-credentials')
+        DOCKER_HUB_CREDENTIALS = credentials('a98e93cd-05d4-4deb-8e0b-1e28f831bdb8')
         REPO = 'logeshlogan/demo-vishal'
         GIT_REPO = 'https://github.com/Logesh-Devops/demo.git'
     }
