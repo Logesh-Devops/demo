@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Use a valid image name format with a timestamp
-                    imageName = "${DOCKER_HUB_USERNAME}/demo-vishal:${timestamp}"
+                    imageName = "${REPO}:${timestamp}"
                     dockerImage = docker.build(imageName)
                 }
             }
@@ -34,7 +34,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    bat "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
+                    bat "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin https://index.docker.io/v1/"
                     dockerImage.push()
                     bat "docker logout"
                 }
