@@ -25,7 +25,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${REPO.replace('/', '-')}:${latestCommitId}")
+                    // Use a simple and valid image name
+                    imageName = "${REPO.split('/')[1]}:${latestCommitId}"
+                    dockerImage = docker.build(imageName)
                 }
             }
         }
