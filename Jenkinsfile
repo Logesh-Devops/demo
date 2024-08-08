@@ -34,9 +34,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    bat "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin https://index.docker.io/v1/"
+                    sh "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin https://index.docker.io/v1/"
                     dockerImage.push()
-                    bat "docker logout"
+                    sh "docker logout"
                 }
             }
         }
