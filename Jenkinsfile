@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_CREDENTIALS = 'a98e93cd-05d4-4deb-8e0b-1e28f831bdb8'
+        DOCKER_HUB_USERNAME = 'logeshlogan'
+        DOCKER_HUB_PASSWORD = 'dckr_pat_FkFmZwfQ2QTqLd0uxRKZNHjY_R4'
         REPO = 'logeshlogan/demo-vishal'
         GIT_REPO = 'https://github.com/Logesh-Devops/demo.git'
     }
@@ -31,12 +32,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
-                        dockerImage.push()
-                    }
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_HUB_CREDENTIALS) {
-                        dockerImage.push('latest')
-                    }
+                    sh "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
+                    dockerImage.push()
+                    sh "docker logout"
                 }
             }
         }
