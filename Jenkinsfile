@@ -17,7 +17,7 @@ pipeline {
         stage('Get Commit ID') {
             steps {
                 script {
-                    latestCommitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                    latestCommitId = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     echo "Latest Commit ID: ${latestCommitId}"
                 }
             }
@@ -32,9 +32,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    sh "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
+                    bat "echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_USERNAME} --password-stdin"
                     dockerImage.push()
-                    sh "docker logout"
+                    bat "docker logout"
                 }
             }
         }
