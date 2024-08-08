@@ -16,7 +16,7 @@ pipeline {
         stage('Get Commit ID') {
             steps {
                 script {
-                    latestCommitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                    latestCommitId = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     echo "Latest Commit ID: ${latestCommitId}"
                 }
             }
