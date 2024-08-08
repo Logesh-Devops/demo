@@ -14,19 +14,19 @@ pipeline {
                 git url: "${GIT_REPO}"
             }
         }
-        stage('Get Commit ID') {
+        stage('Get Timestamp') {
             steps {
                 script {
-                    latestCommitId = bat(script: 'git rev-parse HEAD', returnStdout: true).trim()
-                    echo "Latest Commit ID: ${latestCommitId}"
+                    timestamp = new Date().format("yyyyMMddHHmmss")
+                    echo "Build Timestamp: ${timestamp}"
                 }
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Use a simple and valid image name
-                    imageName = "${REPO.split('/')[1]}:${latestCommitId}"
+                    // Use a valid image name format with a timestamp
+                    imageName = "${DOCKER_HUB_USERNAME}/demo-vishal:${timestamp}"
                     dockerImage = docker.build(imageName)
                 }
             }
