@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_HUB_USERNAME = 'logeshlogan'
         DOCKER_HUB_PASSWORD = 'dckr_pat_FkFmZwfQ2QTqLd0uxRKZNHjY_R4'
-        REPO = 'logeshlogan/demo-vishal'
+        REPO = 'logeshlogan'
         GIT_REPO = 'https://github.com/Logesh-Devops/demo.git'
     }
 
